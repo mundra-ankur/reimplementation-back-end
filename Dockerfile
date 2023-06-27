@@ -19,4 +19,4 @@ RUN bundle install
 
 EXPOSE 4000
 
-CMD ["bash"]
+CMD ["sh", "-c", "rake db:create && rake db:migrate && bash"]
