@@ -23,7 +23,7 @@ jobs:
           MYSQL_PASSWORD: password
     env:
       RAILS_ENV: test
-      DATABASE_URL: "mysql://rails:password@localhost:3306/reimplementation_test"
+      DATABASE_URL: "mysql://rails:password@localhost:3306/reimplementation"
     
     steps:
       - name: Checkout code
