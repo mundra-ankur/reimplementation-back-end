@@ -19,4 +19,4 @@ RUN bundle install
 
 EXPOSE 4000
 RUN chmod +x entrypoint.sh
-ENTRYPOINT ["./entrypoint.sh"]
+ENTRYPOINT ["entrypoint.sh"]
