@@ -18,5 +18,5 @@ RUN gem update --system && gem install bundler:2.4.7
 RUN bundle install
 
 EXPOSE 4000
-
-CMD ["sh", "-c", "rake db:create && rake db:migrate && bash"]
+RUN chmod +x entrypoint.sh
+ENTRYPOINT ["./entrypoint.sh"]
