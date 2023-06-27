@@ -1,0 +1,40 @@
+# This workflow will install a prebuilt Ruby version, install dependencies, and
+# run tests and linters.
+name: "Run Rspec Tests"
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "main" ]
+    paths-ignore: ['**.md', '**.yml']
+  pull_request:
+    branches: [ "main" ]
+    paths-ignore: ['**.md', '**.yml']
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        ports:
+          - "3306:3306"
+        env:
+          MYSQL_DATABASE: reimplementation_test
+          MYSQL_USER: rails
+          MYSQL_PASSWORD: password
+    env:
+      RAILS_ENV: test
+      DATABASE_URL: "mysql://rails:password@localhost:3306/reimplementation_test"
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install Ruby and gems
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.2.1
+          bundler-cache: true
+      - name: Set up database schema
+        run: bin/rails db:schema:load
+      # Add or replace test runners here
+      - name: Run tests
+        run: bundle exec rspec
