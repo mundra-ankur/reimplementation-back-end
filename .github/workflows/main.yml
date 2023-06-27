@@ -10,21 +10,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
-    services:
-      db:
-        image: mysql:8.0
-        env:
-          MYSQL_USER: dev
-          MYSQL_PASSWORD: expertiza
-          MYSQL_ROOT_PASSWORD: expertiza
-          MYSQL_DATABASE: reimplementation
-        ports:
-          - 3306:3306
-        options: >-
-          --health-cmd="mysqladmin ping"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=3
+    
 
     steps:
     - name: Checkout code
