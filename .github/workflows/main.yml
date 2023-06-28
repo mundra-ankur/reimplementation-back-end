@@ -9,9 +9,6 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-
-    
-
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
@@ -23,7 +20,12 @@ jobs:
       run: docker-compose ps && sleep 30
 
     - name: Run RSpec tests
-      run: docker-compose run --rm app bundle exec rspec
+      run: |
+        docker-compose run app rake db:create
+        docker-compose run app rake db:migrate
+        docker-compose run --rm app bundle exec rspec
+      env:
+        RAILS_ENV: test
 
     - name: Stop and remove containers
       run: docker-compose down
