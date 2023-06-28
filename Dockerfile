@@ -18,5 +18,5 @@ RUN gem update --system && gem install bundler:2.4.7
 RUN bundle install
 
 EXPOSE 4000
-RUN chmod +x entrypoint.sh
+RUN chmod +x /app/entrypoint.sh
 ENTRYPOINT ["/app/entrypoint.sh"]
